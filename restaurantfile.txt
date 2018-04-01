@@ -1,0 +1,32 @@
+-- Creating empty restaurant table
+  CREATE TABLE restaurant (
+  id SERIAL NOT NULL PRIMARY KEY,
+  name VARCHAR,
+  distance INTEGER,
+  stars INTEGER,
+  category VARCHAR,
+  best_dish VARCHAR,
+  takeout BOOLEAN,
+  last_eaten DATE
+  );
+-- sample restaurant inserted into table
+  INSERT INTO restaurant VALUES (
+    DEFAULT, 'Pizza Planet', 4, 4, 'Italian', 'Martian Meatza', TRUE, '2018-01-17'
+    );
+--1.The names of the restaurants that you gave a 5 stars to
+SELECT name FROM restaurant WHERE stars = 5;
+--2.The favorite dishes of all 5-star restaurants
+SELECT best_dish FROM restaurant WHERE stars = 5;
+--3.The id of a restaurant by a specific restaurant name, say 'Moon Tower'
+SELECT id from restaurant WHERE name = 'Fratellis'
+--4.restaurants in the category of 'BBQ'
+SELECT name FROM restaurant WHERE category = 'BBQ';
+--5.restaurants that do take out
+SELECT name FROM restaurant WHERE takeout = TRUE;
+--6.restaurants that do take out and is in the category of 'BBQ'
+SELECT name FROM restaurant WHERE takeout = TRUE AND category = 'BBQ';
+--7.restaurants within 2 miles
+--8.restaurants you haven't ate at in the last week
+SELECT name FROM restaurant WHERE last_eaten BETWEEN '2018-03-25' AND '2018-04-01';
+--9.restaurants you haven't ate at in the last week and has 5 stars
+SELECT name FROM restaurant WHERE last_eaten < '2018-03-25' AND stars = 5;
