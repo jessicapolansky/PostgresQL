@@ -1,0 +1,78 @@
+-- List all the reviews for a given restaurant given a specific restaurant ID.
+SELECT review.title FROM review
+JOIN restaurant ON restaurant.id = review.restaurant_id
+WHERE restaurant.id = 1;
+
+--List all the reviews for a given restaurant, given a specific restaurant name.
+SELECT review.title FROM review
+JOIN restaurant ON restaurant.id = review.restaurant_id
+WHERE restaurant.name = 'Fromage';
+
+-- List all the reviews for a given reviewer, given a specific author name.
+SELECT review.title FROM review
+JOIN reviewer ON reviewer.id = review.reviewer_id
+WHERE reviewer.name = 'Hungry Harry';
+
+-- List all the reviews along with the restaurant they were written for. 
+SELECT restaurant.name, review.review FROM review
+JOIN restaurant ON restaurant.id = review.restaurant_id
+ORDER BY name;
+-- In the query result, select the restaurant name and the review text.
+SELECT * FROM 
+(SELECT restaurant.name, review.review FROM review
+JOIN restaurant ON restaurant.id = review.restaurant_id)
+AS text
+WHERE name = 'Brauhaus' AND review = 'NSFW :(';
+
+--Get the average stars by restaurant. The result should have the restaurant
+-- name and its average star rating.
+SELECT name, AVG(stars)
+FROM 
+  (SELECT restaurant.name, review.stars
+  FROM restaurant
+  JOIN review ON restaurant.id = review.restaurant_id)
+AS average_stars
+GROUP BY name;
+
+-- Get the number of reviews written for each restaurant. The result should have
+-- the restaurant name and its review count.
+SELECT name, COUNT(review)
+FROM 
+  (SELECT restaurant.name, review.review
+  FROM restaurant
+  JOIN review ON restaurant.id = review.restaurant_id)
+AS review_count
+GROUP BY name;
+
+-- List all the reviews along with the restaurant, and the reviewer's name.
+SELECT restaurant.name, reviewer.name, review.review FROM review
+JOIN restaurant ON review.restaurant_id = restaurant.id
+JOIN reviewer ON review.reviewer_id = reviewer.id;
+
+-- Get the average stars given by each reviewer. (reviewer name, average stars)
+SELECT name, AVG(stars)
+FROM 
+  (SELECT reviewer.name, review.stars
+  FROM reviewer
+  JOIN review ON reviewer.id = review.reviewer_id)
+AS average_stars
+GROUP BY name;
+
+-- Get the lowest star rating given by each reviewer. (name, lowest stars)
+SELECT reviewer.name, MIN(review.stars) FROM reviewer
+JOIN review ON reviewer.id = review.reviewer_id GROUP BY name;
+
+-- Get the number of restaurants in each category. (category name, rest count)
+SELECT restaurant.category, COUNT(restaurant.id)
+FROM restaurant GROUP BY category;
+
+-- Get number of 5 star reviews given by restaurant. (name, 5-star count)
+SELECT name, COUNT(stars) FROM (SELECT restaurant.name, stars
+FROM review JOIN restaurant ON review.restaurant_id = restaurant.id
+WHERE stars = 5) AS fivestarcount GROUP BY name;
+
+-- Get the average star rating for a food category. (name, average star rating)
+SELECT category, AVG(stars)
+FROM (SELECT restaurant.category, review.stars
+FROM restaurant JOIN review ON restaurant.id = review.restaurant_id)
+AS average_stars GROUP BY category;
