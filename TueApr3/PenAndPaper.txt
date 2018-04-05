@@ -1,0 +1,32 @@
+-- Step 1. Determine the above relationships are one to many or many to many.
+OWNERS AND PETS
+One to Many (Owners to pets). You can have multiple family members, but 
+typically pets still have their "one" alpha person they obey
+BLOG POSTS AND AUTHORS
+One to Many (Author to blog post). You could have co-authors for some things
+but I think with blogs, you're likely only going to have one author due to
+brevity.
+
+TEACHERS AND STUDENTS
+student_taught_by_teacher
+PARENTS AND CHILDREN
+parent_has_child
+CLASSES AND OBJECTS
+class_used_for_object
+PROJECTS AND CONTRIBUTORS
+project_by_contributor
+These are all Many to Many
+
+--Step 2. Take just one of the above examples, draw some sample data.
+--And do an inner join and then a left outer join.
+Classes and Objects
+Animal      Cat
+Animal      Dog
+Pet         Dog
+Pet         Cat
+Animal      Eagle
+Pet         Rock
+--          Couch
+Plant       --
+Show only objects that have a class (Cat, Dog, Eagle, Rock)
+Show only classes that have no objects (Plant)
