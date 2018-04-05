@@ -1,6 +1,0 @@
--- What are all projects that use JavaScript? ANSWER is none:
-SELECT project.name, project_uses_tech.tech_id
-FROM project
-JOIN project_uses_tech ON project_uses_tech.project_id = project.id
-WHERE project_uses_tech.tech_id = 3;
-
