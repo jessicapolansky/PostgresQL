@@ -1,0 +1,7 @@
+ARTIST -> Song                       
+Song -> Artist
+performed_by
+Artist -> Album
+appears_on
+ALBUM -> Track
+Song Writer -> Song
