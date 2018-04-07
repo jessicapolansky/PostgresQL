@@ -1,7 +1,26 @@
-ARTIST -> Song                       
-Song -> Artist
+Step 1 - Process
+ARTIST -> Songs                      
+Song -> Artists
 performed_by
-Artist -> Album
+Artist -> Albums
+Album -> Artists
 appears_on
-ALBUM -> Track
+ALBUM -> Tracks
 Song Writer -> Song
+Song -> Song Writers
+written_by
+
+ARTIST - id, name
+SONG - id, name
+performed_by - id, artist_id, song_id
+ALBUM - id, name, year
+appears_on - id, artist_id, album_id
+TRACKS - id, name, duration
+SONGWRITER - id, name
+written_by - id, songwriter_id, song_id
+
+Questions:
+1. What are tracks for a given album?
+SELECT name, track.id FROM track
+JOIN track_album ON track.id = track_album.track_id
+JOIN album ON album.id = track_album.album_id;
