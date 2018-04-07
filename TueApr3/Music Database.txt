@@ -19,8 +19,27 @@ TRACKS - id, name, duration
 SONGWRITER - id, name
 written_by - id, songwriter_id, song_id
 
-Questions:
-1. What are tracks for a given album?
+--Questions:
+--1. What are tracks for a given album?
 SELECT name, track.id FROM track
 JOIN track_album ON track.id = track_album.track_id
 JOIN album ON album.id = track_album.album_id;
+
+--2. What are the albums produced by a given artist?
+SELECT album.name, artist.name FROM artist
+JOIN appears_on ON artist.id = appears_on.artist_id
+JOIN album ON album.id = appears_on.album_id;
+
+--3. What is the track with the longest duration?
+--(I'm assuming you'd want to know the actual song name..)
+SELECT name, duration FROM track
+JOIN song_track ON track.id = song_track.track_id
+JOIN song ON song.id = song_track.song_id
+ORDER BY duration DESC LIMIT 1;
+
+--4. What are the albums released in the 60s? 70s? 80s? 90s?
+--(Sorry, gonna change this to pre- and post- 2000's, 2010's, etc.)
+SELECT name, year FROM album WHERE year < 2000 ORDER BY year ASC;
+SELECT name, year FROM album WHERE year > 1999 AND year < 2010 ORDER BY year ASC;
+SELECT name, year FROM album WHERE year > 2009 AND year < 2020 ORDER BY year ASC;
+
