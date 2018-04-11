@@ -1,0 +1,38 @@
+React is like jquery, library for building parts of a UI ('html')
+but more like 'vanilla JS', less new terms to learn
+helps you learn JS skills because so much crossover
+also a small library, unlike Angular
+components are created to build together into bigger things, they are re-usable
+JSX is a templating language (like jinja2 for python) helps you build html using JS
+CSS, HTML, JS are separation of concern languages -> style, structure, and functionality
+but when changing things by files, making it difficult to update -> separation of technologies
+React is all in one file!
+state = data internal to a component, managed by the component itself
+props = properties passed from largest/parent component into child component -> largest component doesn't have props
+        the parent helps constrain the props
+A room can change its state, but not its props
+    this.setState(): common function for components for 'changing' state - previous data is erased and new data appears
+    
+codesandbox - playground for React
+    render (): tells it to render the HTML of a page
+JS: ... = object spread operator
+    Object.assign() -> used to copy
+    const newthing = Object.assing()
+    {}, <-- empty object
+    oldthing,
+    {
+    ***properties you want to add for newthing**
+    }
+    
+npm: repo for JS libraries, can get them from npm.js or install npm
+yarn: alternative to npm, command line tool for getting packages from npm
+    eject- 'explodes' out all the diferent files/components for creating your app, not recommended b/c its permanent
+
+index.js: first file JS reads, pulls your index.css, etc.
+
+html id of 'root': place where all react work is done, generates everything, making html 'body' irrelevant (unless
+you're missing JS)
+can use { } to signal to React that what's in between the curly braces is to be executed using JS
+map: method that takes your array and changes it (can take number in an array, use in LI tags class="number")
+can't use word 'class' in JS, have to use 'classname' as basically the same thing
+    

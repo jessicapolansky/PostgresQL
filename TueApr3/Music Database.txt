@@ -43,3 +43,36 @@ SELECT name, year FROM album WHERE year < 2000 ORDER BY year ASC;
 SELECT name, year FROM album WHERE year > 1999 AND year < 2010 ORDER BY year ASC;
 SELECT name, year FROM album WHERE year > 2009 AND year < 2020 ORDER BY year ASC;
 
+--5. How many albums did a given artist produce in the 2000s?
+SELECT COUNT(album.name) FROM artist
+JOIN appears_on ON artist.id = appears_on.artist_id
+JOIN album ON album.id = appears_on.album_id
+WHERE year > 1999 AND year < 2010 AND artist.name = 'Nightwish';
+
+--6. What is each artist's latest album? ***need to work on this, only works cuz top 3 are unique artists
+SELECT artist.name, album.name, year FROM artist
+JOIN appears_on ON artist.id = appears_on.artist_id
+JOIN album ON album.id = appears_on.album_id
+ORDER BY year DESC LIMIT 3;
+
+--7. List all albums along with its total duration based on summing the duration of its tracks.
+SELECT album.name, SUM(duration) FROM album
+JOIN track_album ON album.id = track_album.album_id
+JOIN track ON track.id = track_album.track_id
+GROUP BY name;
+
+--8. What is the album with the longest duration?
+SELECT album.name, SUM(duration) FROM album
+JOIN track_album ON album.id = track_album.album_id
+JOIN track ON track.id = track_album.track_id
+GROUP BY name ORDER BY sum LIMIT 1;
+
+--9. Who are the 5 most prolific artists based on the number of albums they have recorded?
+SELECT artist.name, COUNT(album.name) FROM artist
+JOIN appears_on ON artist.id = appears_on.artist_id
+JOIN album ON album.id = appears_on.album_id
+GROUP BY artist.name ORDER BY count DESC LIMIT 5;
+
+--10. What are all the tracks a given artist has recorded?
+
+--11. What are the top 5 most often recorded songs?
